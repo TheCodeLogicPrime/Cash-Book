@@ -11,10 +11,13 @@ jobs:
       with:
         flutter-version: '3.13.0'
         channel: 'stable'
-    - run: flutter pub get
-    - run: flutter build apk --release
+    - run: flutter create my_app
+    - run: cp -r lib my_app/
+    - run: cp pubspec.yaml my_app/
+    - run: cd my_app && flutter pub get
+    - run: cd my_app && flutter build apk --release
     - uses: actions/upload-artifact@v3
       with:
         name: app-release
-        path: build/app/outputs/flutter-apk/app-release.apk
+        path: my_app/build/app/outputs/flutter-apk/app-release.apk
         
